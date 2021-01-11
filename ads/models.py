@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from hitcount.models import HitCount
 
-from users.models import StandardModel
+from core.models import StandardModel, MoneyField
 
 
 class Category(StandardModel):
@@ -25,15 +25,6 @@ class Category(StandardModel):
 
     def __str__(self):
         return self.name
-
-
-class MoneyField(models.DecimalField):
-    """Тип для денег."""
-
-    def __init__(self, *args, **kwargs):
-        kwargs['max_digits'] = 16
-        kwargs['decimal_places'] = 2
-        super().__init__(*args, **kwargs)
 
 
 class Region(StandardModel):

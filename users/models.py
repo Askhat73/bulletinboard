@@ -1,23 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from core.models import StandardModel
 from .validators import TelephoneNumberValidator
-
-
-class StandardModel(models.Model):
-    """Стандартная модель."""
-
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name='Дата создания',
-    )
-    updated_at = models.DateTimeField(
-        auto_now=True,
-        verbose_name='Дата обновления',
-    )
-
-    class Meta:
-        abstract = True
 
 
 class CustomUser(AbstractUser, StandardModel):

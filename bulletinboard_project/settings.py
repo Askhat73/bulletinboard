@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'hitcount',
 
     # Локальные приложения
+    'core.apps.CoreConfig',
     'users.apps.UsersConfig',
     'ads.apps.AdsConfig',
 ]
