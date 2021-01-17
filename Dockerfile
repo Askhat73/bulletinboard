@@ -14,6 +14,9 @@ RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev
 # install Pillow dependencies
 RUN apk add jpeg-dev zlib-dev
 
+# install django-allauth dependencies
+RUN apk add libffi-dev
+
 # Install dependencies
 COPY Pipfile Pipfile.lock /code/
 RUN pip install pipenv && pipenv install --system
