@@ -1,5 +1,5 @@
 from allauth.account.adapter import get_adapter
-from allauth.account.forms import SignupForm
+from allauth.account.forms import SignupForm, LoginForm
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
@@ -64,3 +64,10 @@ class CustomSignupForm(SignupForm):
 
     def validate_unique_phone(self, value):
         return get_adapter().validate_unique_phone(value)
+
+
+class CustomLoginForm(LoginForm):
+    """Форма авторизации пользователя."""
+
+    def __init__(self, *args, **kwargs):
+        super(CustomLoginForm, self).__init__(*args, **kwargs)
