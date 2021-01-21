@@ -4,4 +4,8 @@
 
 {% block content %}
     <h1>Home</h1>
+    <p><a href="{% url 'account_signup' %}">Зарегистрироваться</a></p>
+    <p><a href="{% url 'account_login' %}">Авторизоваться</a></p>
+    <p><a href="{% url 'account_reset_password' %}">Сбросить пароль</a></p>
+    <p><a href="{% url 'account_logout' %}">Выйти</a></p>
 {% endblock content %}
