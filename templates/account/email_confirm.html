@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+
+{% block title %}Подтвердить email{% endblock title %}
+
+{% block content %}
+    {% if confirmation %}
+        <h1>Подтвердите e-mail адрес</h1>
+        <p>Пожалуйста, подтвердите <a href="mailto:{{ confirmation.email_address.email }}">{{ confirmation.email_address.email }}</a>
+            для пользователя {{ confirmation.email_address.user }}.</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit">Подтвердить email</button>
+        </form>
+
+    {% else %}
+        <p>Эта ссылка истекла. Пожалуйста <a href="{% url 'account_email' %}">получите новую ссылку</a>.</p>
+    {% endif %}
+{% endblock content %}
