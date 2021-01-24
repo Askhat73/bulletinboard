@@ -3,6 +3,7 @@ from allauth.account.forms import SignupForm, LoginForm
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from snowpenguin.django.recaptcha2.fields import ReCaptchaField
 from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
@@ -69,5 +70,19 @@ class CustomSignupForm(SignupForm):
 class CustomLoginForm(LoginForm):
     """Форма авторизации пользователя."""
 
+    def login(self, request, redirect_url=None):
+        user = self.user
+        redirect_url = redirect_url or self._get_redirect_url(user)
+        return super(CustomLoginForm, self).login(request, redirect_url)
+
     def __init__(self, *args, **kwargs):
         super(CustomLoginForm, self).__init__(*args, **kwargs)
+
+    def _get_redirect_url(self, user) -> str:
+        """Получает ссылку для редиректа после авторизации."""
+
+        if user.is_admin:
+            return reverse_lazy('admin_lk')
+        elif user.is_moderator:
+            return reverse_lazy('moderator_lk')
+        return reverse_lazy('advertiser_lk')
